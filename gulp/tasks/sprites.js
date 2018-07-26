@@ -2,7 +2,7 @@ var gulp = require('gulp'),
 svgSprite = require('gulp-svg-sprite'),
 rename = require('gulp-rename'),
 del = require('del'),
-svg2png  = require('gulp-svg2png');
+svg2png = require('gulp-svg2png');
 
 var config = {
   shape: {
@@ -16,10 +16,8 @@ var config = {
         replaceSvgWithPng: function() {
           return function(sprite, render) {
             return render(sprite).split('.svg').join('.png');
-
           }
         }
-
       },
       sprite: 'sprite.svg',
       render: {
@@ -41,14 +39,11 @@ gulp.task('createSprite', ['beginClean'], function() {
     .pipe(gulp.dest('./app/temp/sprite/'));
 });
 
-
 gulp.task('createPngCopy', ['createSprite'], function() {
   return gulp.src('./app/temp/sprite/css/*.svg')
     .pipe(svg2png())
     .pipe(gulp.dest('./app/temp/sprite/css'));
 });
-
-
 
 gulp.task('copySpriteGraphic', ['createPngCopy'], function() {
   return gulp.src('./app/temp/sprite/css/**/*.{svg,png}')
